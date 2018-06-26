@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertDiary", "ConcertDiary\ConcertDiary.csproj", "{B5B11F1F-B387-402E-95CF-6AE3EC120DE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertDiary.Tests", "ConcertDiary.Tests\ConcertDiary.Tests.csproj", "{BC11CE75-56B4-4AB8-B278-74548E0A3146}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5B11F1F-B387-402E-95CF-6AE3EC120DE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5B11F1F-B387-402E-95CF-6AE3EC120DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5B11F1F-B387-402E-95CF-6AE3EC120DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5B11F1F-B387-402E-95CF-6AE3EC120DE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC11CE75-56B4-4AB8-B278-74548E0A3146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC11CE75-56B4-4AB8-B278-74548E0A3146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC11CE75-56B4-4AB8-B278-74548E0A3146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC11CE75-56B4-4AB8-B278-74548E0A3146}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D394E292-B875-41B2-A8EB-CA6C3DC73617}
+	EndGlobalSection
+EndGlobal
