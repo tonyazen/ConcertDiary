@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "2fb260c6-e951-4666-86df-ede1f6ecce71",
+		"name": "Concerts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Delete Concert",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "app_id",
+						"value": "{{app_id}}"
+					},
+					{
+						"key": "user",
+						"value": "{{user}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/api/concerts/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"concerts",
+						"1"
+					]
+				},
+				"description": "Delete an existing Concert."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Concert",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9086a8cc-6b7b-46f5-9f64-49e13d0d1a9f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Header Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Header App Id is present\", function () {",
+							"    pm.response.to.have.header(\"app_id\");",
+							"});",
+							"",
+							"pm.test(\"Header User is present\", function () {",
+							"    pm.response.to.have.header(\"user\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "app_id",
+						"value": "{{app_id}}"
+					},
+					{
+						"key": "user",
+						"value": "{{user}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Id\": 1,\n    \"Artist\": {\n      \t\"Name\": \"Kaleo\"\n    },\n    \"SupportingArtist\": {\n        \"Name\": \"Dan Mangan\"\n    },\n    \"Venue\": {\n        \"Name\": \"20Monroe\",\n        \"Address\": {\n            \"City\": \"Grand Rapids\",\n            \"State\": \"MI\"\n        }\n    },\n    \"Date\": \"2018-07-01T00:00:00-00:00\",\n    \"Seat\": \"LMLT 5 8\",\n    \"Rating\": 5\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/concerts?tweetConcert=true",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"concerts"
+					],
+					"query": [
+						{
+							"key": "tweetConcert",
+							"value": "true"
+						}
+					]
+				},
+				"description": "Create a new concert."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Concerts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_id",
+						"value": "{{app_id}}"
+					},
+					{
+						"key": "user",
+						"value": "{{user}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/api/concerts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"concerts"
+					]
+				},
+				"description": "Return all concerts."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Concert",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "app_id",
+						"value": "{{app_id}}"
+					},
+					{
+						"key": "user",
+						"value": "{{user}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/api/concerts/1?tweetConcert=true",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"concerts",
+						"1"
+					],
+					"query": [
+						{
+							"key": "tweetConcert",
+							"value": "true"
+						}
+					]
+				},
+				"description": "Update an existing concert"
+			},
+			"response": []
+		}
+	]
+}
