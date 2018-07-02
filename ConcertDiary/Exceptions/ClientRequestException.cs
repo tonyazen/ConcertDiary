@@ -11,10 +11,5 @@ namespace ConcertDiary.Exceptions
         {
             StatusCode = statusCode;
         }
-
-        public ClientRequestException(HttpStatusCode statusCode, string message, Exception ex) : base(message, ex)
-        {
-            StatusCode = statusCode;
-        }
     }
 }

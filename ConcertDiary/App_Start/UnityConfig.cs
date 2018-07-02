@@ -2,8 +2,8 @@ using System.Web.Http.Dependencies;
 using ConcertDiary.Ioc;
 using ConcertDiary.Repository;
 using ConcertDiary.Services;
-using log4net;
 using Unity;
+using UnityLog4NetExtension.Log4Net;
 
 namespace ConcertDiary
 {
@@ -15,7 +15,6 @@ namespace ConcertDiary
         private static UnityContainer InitializeContainer()
         {
             var container = new UnityContainer();
-            container.RegisterInstance<ILog>(new LogWriter());
             container.RegisterType<IConcertService, ConcertService>();
             container.RegisterType<ITweetService, TweetService>();
             container.RegisterType<IConcertRepo, ConcertRepo>();

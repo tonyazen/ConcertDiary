@@ -1,4 +1,4 @@
-﻿using ConcertDiary.Ioc;
+﻿using ConcertDiary.Controllers;
 using ConcertDiary.Models;
 using ConcertDiary.Models.ResponseModels;
 using ConcertDiary.Repository;
@@ -10,19 +10,15 @@ namespace ConcertDiary.Services
     public class ConcertService : IConcertService
     {
         private readonly IConcertRepo _concertRepo;
-        //private readonly ILog _logger;
-        private ILog _logger;
+        private readonly ILog _logger = LogManager.GetLogger((typeof(ConcertsController)));
 
-        //public ConcertService(IConcertRepo concertRepo, ILog logger)
-        //{
-        //    _concertRepo = concertRepo;
-        //    _logger = logger;
-        //}
+        public ConcertService(IConcertRepo concertRepo)
+        {
+            _concertRepo = concertRepo;
+        }
 
         public ConcertsResponse GetConcerts(string requestId)
         {
-            _logger = new LogWriter();
-
             var response = new ConcertsResponse
             {
                 RequestId = requestId

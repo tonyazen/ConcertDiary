@@ -12,13 +12,11 @@ namespace ConcertDiary.Controllers
 {
     public class ConcertsController : ApiController
     { 
-        private readonly ILog _logger;
         private readonly IConcertService _concertService;
         private readonly ITweetService _tweetService;
 
-        public ConcertsController(ILog logger, IConcertService concertService, ITweetService tweetService)
+        public ConcertsController(IConcertService concertService, ITweetService tweetService)
         {
-            _logger = logger;
             _concertService = concertService;
             _tweetService = tweetService;
         }
@@ -28,7 +26,7 @@ namespace ConcertDiary.Controllers
         {
             var requestId = Guid.NewGuid().ToString("N");
 
-            RequestValidator.ValidateWebRequest(Request);
+            RequestValidator.ValidateWebRequestHeaders(Request);
 
             return _concertService.GetConcerts(requestId);
         }
@@ -38,47 +36,41 @@ namespace ConcertDiary.Controllers
         {
             var requestId = Guid.NewGuid().ToString("N");
 
-            RequestValidator.ValidateWebRequest(Request);
+            RequestValidator.ValidateWebRequestHeaders(Request);
 
             return _concertService.GetConcert(requestId, id);
         }
 
-        [Route("api/concerts/{id}"), HttpPost]
-        public CreateUpdateConcertResponse CreateConcert(bool tweetConcert, [FromBody] Concert concert)
+        [Route("api/concerts"), HttpPost]
+        public CreateUpdateConcertResponse CreateConcert([FromUri] bool tweetConcert, [FromBody] Concert concert)
         {
             var requestId = Guid.NewGuid().ToString("N");
 
+            RequestValidator.ValidateWebRequestHeaders(Request);
+
             if (concert == null)
-            {
-                var errorMessage = $"Failed to parse request body for request ID {requestId}.";
-                _logger.ErrorFormat(errorMessage);
-                throw new ClientRequestException(HttpStatusCode.BadRequest, errorMessage);
-            }
-            
-            RequestValidator.ValidateWebRequest(Request);
+                throw new ClientRequestException(HttpStatusCode.BadRequest, "Failed to parse Concert.");
+
+            if (!concert.ValidateConcert())
+                throw new ClientRequestException(HttpStatusCode.BadRequest, "One or more Concert property is null or incorrect.");
 
             var responseModel = _concertService.CreateConcert(requestId, concert);
+
             responseModel.TweetUrl = tweetConcert ? _tweetService.TweetConcert(concert) : string.Empty;
 
             return responseModel;
         }
 
         [Route("api/concerts/{id}"), HttpPut]
-        public CreateUpdateConcertResponse UpdateConcert(bool tweetConcert, [FromBody] Concert concert)
+        public CreateUpdateConcertResponse UpdateConcert([FromUri] bool tweetConcert, [FromBody] Concert concert)
         {
             var requestId = Guid.NewGuid().ToString("N");
 
-            if (concert == null)
-            {
-                var errorMessage = $"Failed to parse request body for request ID {requestId}.";
-                _logger.ErrorFormat(errorMessage);
-                throw new ClientRequestException(HttpStatusCode.BadRequest, errorMessage);
-            }
-
-            RequestValidator.ValidateWebRequest(Request);
+            RequestValidator.ValidateWebRequestHeaders(Request);
+            ConcertValidator.ValidateUpdateConcert(concert);
 
             var responseModel = _concertService.CreateConcert(requestId, concert);
-            responseModel.TweetUrl = tweetConcert ? _tweetService.TweetConcert(concert).ToString() : string.Empty;
+            responseModel.TweetUrl = tweetConcert ? _tweetService.TweetConcert(concert) : string.Empty;
 
             return responseModel;
         }
@@ -88,7 +80,7 @@ namespace ConcertDiary.Controllers
         {
             var requestId = Guid.NewGuid().ToString("N");
 
-            RequestValidator.ValidateWebRequest(Request);
+            RequestValidator.ValidateWebRequestHeaders(Request);
 
             var responseModel = _concertService.RemoveConcert(requestId, id);
 

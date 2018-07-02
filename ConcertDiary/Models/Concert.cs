@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.Ajax.Utilities;
 
 namespace ConcertDiary.Models
 {
@@ -14,5 +15,12 @@ namespace ConcertDiary.Models
         public DateTime Date { get; set; }
         public string Seat { get; set; }
         public int Rating { get; set; }
+
+        public bool ValidateConcert()
+        {
+            return Artist != null && !Artist.Name.IsNullOrWhiteSpace() &&
+                   Venue != null && !Venue.Name.IsNullOrWhiteSpace() &&
+                   Date != DateTime.MinValue;
+        }
     }
 }

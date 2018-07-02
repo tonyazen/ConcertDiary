@@ -9,12 +9,10 @@ namespace ConcertDiary.Repository
     public class ConcertRepo : IConcertRepo
     {
         private const string CacheKey = "ConcertStore";
-        private readonly ILog _logger;
+        private readonly ILog _logger = LogManager.GetLogger(typeof(ConcertRepo));
 
-        public ConcertRepo(ILog logger)
+        public ConcertRepo()
         {
-            _logger = logger;
-
             var ctx = HttpContext.Current;
 
             if (ctx != null)
@@ -31,7 +29,7 @@ namespace ConcertDiary.Repository
                             Venue = new Venue{Name = "", Address = new Address{ City = "", State = ""}},
                             Date = DateTime.Today,
                             Rating = 5,
-                            Seat = ""
+                            Seat = "",
                         },
                         new Concert
                         {
@@ -41,7 +39,7 @@ namespace ConcertDiary.Repository
                             Venue = new Venue{Name = "", Address = new Address{ City = "", State = ""}},
                             Date = DateTime.Today,
                             Rating = 5,
-                            Seat = ""
+                            Seat = "",
                         }
                     };
 
@@ -69,7 +67,7 @@ namespace ConcertDiary.Repository
                     Venue = new Venue{Name = "", Address = new Address{ City = "", State = ""}},
                     Date = DateTime.Today,
                     Rating = 5,
-                    Seat = ""
+                    Seat = "",
                 }
             };
         }
