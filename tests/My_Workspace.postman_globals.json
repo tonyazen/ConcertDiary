@@ -1,0 +1,15 @@
+{
+  "id": "1cb1f51e-85d7-4cbc-8a4a-979a4593a218",
+  "values": [
+    {
+      "key": "createConcertSchema",
+      "value": "{\n    \"Concert\": {\n        \"type\": \"object\",\n        \"properties\": {\n            \"Id\": {\n                \"type\": \"string\",\n                \"format\": \"long\"\n            },\n            \"Artist\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"Name\": {\n                        \"type\": \"string\"\n                    }\n                }\n            },\n            \"SupportingArtist\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"Name\": {\n                        \"type\": \"string\"\n                    }\n                }\n            },\n            \"Venue\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"Name\": {\n                        \"type\": \"string\"\n                    },\n                    \"Address\": {\n                        \"type\": \"object\",\n                        \"properites\": {\n                            \"City\": {\n                                \"type\": \"string\"\n                            },\n                            \"State\": {\n                                \"type\": \"string\"\n                            }\n                        }\n                    }\n                }\n            },\n            \"Date\": {\n                \"type\": \"string\",\n                \"format\": \"date-time\"\n            },\n            \"Seat\": {\n                \"type\": \"string\"\n            },\n            \"Rating\": {\n                \"type\": \"int\"\n            }\n        }\n    },\n    \"RequestId\": {\n        \"type\": \"string\"\n    },\n    \"TweetUrl\": {\n        \"type\": \"string\"\n    }\n}",
+      "enabled": true,
+      "type": "text"
+    }
+  ],
+  "name": "My Workspace Globals",
+  "_postman_variable_scope": "globals",
+  "_postman_exported_at": "2018-07-08T16:28:23.158Z",
+  "_postman_exported_using": "Postman/6.1.4"
+}

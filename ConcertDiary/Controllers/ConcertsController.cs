@@ -6,7 +6,6 @@ using ConcertDiary.Models;
 using ConcertDiary.Models.ResponseModels;
 using ConcertDiary.Services;
 using ConcertDiary.Validation;
-using log4net;
 
 namespace ConcertDiary.Controllers
 {
@@ -32,7 +31,7 @@ namespace ConcertDiary.Controllers
         }
 
         [Route("api/concerts/{id}"), HttpGet]
-        public ConcertResponse GetConcert(int id)
+        public ConcertResponse GetConcert(long id)
         {
             var requestId = Guid.NewGuid().ToString("N");
 
@@ -62,14 +61,14 @@ namespace ConcertDiary.Controllers
         }
 
         [Route("api/concerts/{id}"), HttpPut]
-        public CreateUpdateConcertResponse UpdateConcert([FromUri] bool tweetConcert, [FromBody] Concert concert)
+        public CreateUpdateConcertResponse UpdateConcert(long id, [FromUri] bool tweetConcert, [FromBody] Concert concert)
         {
             var requestId = Guid.NewGuid().ToString("N");
 
             RequestValidator.ValidateWebRequestHeaders(Request);
             ConcertValidator.ValidateUpdateConcert(concert);
 
-            var responseModel = _concertService.CreateConcert(requestId, concert);
+            var responseModel = _concertService.UpdateConcert(requestId, concert);
             responseModel.TweetUrl = tweetConcert ? _tweetService.TweetConcert(concert) : string.Empty;
 
             return responseModel;

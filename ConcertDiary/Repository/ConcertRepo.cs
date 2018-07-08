@@ -8,7 +8,8 @@ namespace ConcertDiary.Repository
 {
     public class ConcertRepo : IConcertRepo
     {
-        private const string CacheKey = "ConcertStore";
+        private const string ConcertCacheKey = "ConcertStore";
+        private const string ConcertCurrentIdKey = "CurrentId";
         private readonly ILog _logger = LogManager.GetLogger(typeof(ConcertRepo));
 
         public ConcertRepo()
@@ -17,33 +18,35 @@ namespace ConcertDiary.Repository
 
             if (ctx != null)
             {
-                if (ctx.Cache[CacheKey] == null)
+                if (ctx.Cache[ConcertCacheKey] == null)
                 {
+                    ctx.Cache["CurrentId"] = 2;
+
                     var concert = new[]
                     {
                         new Concert
                         {
                             Id = 1,
-                            Artist = new Artist{Name = ""},
-                            SupportingArtist = new Artist{Name = ""},
-                            Venue = new Venue{Name = "", Address = new Address{ City = "", State = ""}},
-                            Date = DateTime.Today,
+                            Artist = new Artist{Name = "Radiohead"},
+                            SupportingArtist = new Artist{Name = "Caribou"},
+                            Venue = new Venue{Name = "First Midwest Bank Amp", Address = new Address{ City = "Tinley Park", State = "IL"}},
+                            Date = new DateTime(2012, 6, 10),
                             Rating = 5,
-                            Seat = "",
+                            Seat = "L41078",
                         },
                         new Concert
                         {
                             Id = 2,
-                            Artist = new Artist{Name = ""},
+                            Artist = new Artist{Name = "Chris Cornell"},
                             SupportingArtist = new Artist{Name = ""},
-                            Venue = new Venue{Name = "", Address = new Address{ City = "", State = ""}},
-                            Date = DateTime.Today,
+                            Venue = new Venue{Name = "Devos Performance Hall", Address = new Address{ City = "Grand Rapids", State = "MI"}},
+                            Date = new DateTime(2016, 7, 2),
                             Rating = 5,
-                            Seat = "",
+                            Seat = "MEZZ A35",
                         }
                     };
 
-                    ctx.Cache[CacheKey] = concert;
+                    ctx.Cache[ConcertCacheKey] = concert;
                 }
             }
         }
@@ -54,7 +57,7 @@ namespace ConcertDiary.Repository
 
             if (ctx != null)
             {
-                return (Concert[])ctx.Cache[CacheKey];
+                return (Concert[])ctx.Cache[ConcertCacheKey];
             }
 
             return new[]
@@ -80,7 +83,7 @@ namespace ConcertDiary.Repository
             {
                 try
                 {
-                    var currentData = ((Concert[])ctx.Cache[CacheKey]).ToList();
+                    var currentData = ((Concert[])ctx.Cache[ConcertCacheKey]).ToList();
                     return currentData.FirstOrDefault(concert => concert.Id == id);
                 }
                 catch (Exception ex)
@@ -101,9 +104,16 @@ namespace ConcertDiary.Repository
             {
                 try
                 {
-                    var currentData = ((Concert[])ctx.Cache[CacheKey]).ToList();
+                    var currentData = ((Concert[])ctx.Cache[ConcertCacheKey]).ToList();
+
+                    long currentId;
+                    Int64.TryParse(ctx.Cache["CurrentId"].ToString(), out currentId);
+                    currentId++;
+                    concert.Id = currentId;
+                    ctx.Cache["CurrentId"] = currentId;
+
                     currentData.Add(concert);
-                    ctx.Cache[CacheKey] = currentData.ToArray();
+                    ctx.Cache[ConcertCacheKey] = currentData.ToArray();
 
                     return concert;
 
@@ -125,7 +135,7 @@ namespace ConcertDiary.Repository
             {
                 try
                 {
-                    var currentData = ((Concert[])ctx.Cache[CacheKey]).ToList();
+                    var currentData = ((Concert[])ctx.Cache[ConcertCacheKey]).ToList();
                     foreach (var concert in currentData)
                     {
                         if (concert.Id == updateConcert.Id)
@@ -139,9 +149,9 @@ namespace ConcertDiary.Repository
                         }
                     }
 
-                    ctx.Cache[CacheKey] = currentData.ToArray();
+                    ctx.Cache[ConcertCacheKey] = currentData.ToArray();
 
-                    return currentData.FirstOrDefault(beer => beer.Id == updateConcert.Id);
+                    return currentData.FirstOrDefault(concert => concert.Id == updateConcert.Id);
                 }
                 catch (Exception ex)
                 {
@@ -161,10 +171,10 @@ namespace ConcertDiary.Repository
             {
                 try
                 {
-                    var currentData = ((Concert[])ctx.Cache[CacheKey]).ToList();
+                    var currentData = ((Concert[])ctx.Cache[ConcertCacheKey]).ToList();
                     var concertToRemove = currentData.FirstOrDefault(concert => concert.Id == id);
                     currentData.Remove(concertToRemove);
-                    ctx.Cache[CacheKey] = currentData.ToArray();
+                    ctx.Cache[ConcertCacheKey] = currentData.ToArray();
 
                     return true;
                 }

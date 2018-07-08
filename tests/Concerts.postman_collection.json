@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "2fb260c6-e951-4666-86df-ede1f6ecce71",
+		"name": "Concerts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Concerts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "26c807f8-0383-4dd0-a2ec-be9854cc968a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Header Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "app_id",
+						"value": "{{app_id}}"
+					},
+					{
+						"key": "user",
+						"value": "{{user}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/api/concerts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"concerts"
+					]
+				},
+				"description": "Return all concerts."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Concert",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f458623-09c2-4ec4-9f68-bac7797c170f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Header Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"var schema = pm.globals.get(\"createConcertSchema\");",
+							"",
+							"var responseBody = pm.response.json();",
+							"",
+							"pm.test(\"Schema is valid\", function() {",
+							"  pm.expect(tv4.validate(responseBody, schema, false, true)).to.be.true;",
+							"});",
+							"",
+							"var requestId = responseBody.RequestId;",
+							"console.log(requestId);",
+							"",
+							"",
+							"var requestIdLength = requestId.length;",
+							"",
+							"pm.test(\"Request Id is valid\", function() {",
+							"    pm.expect(requestIdLength > 0).to.be.true;",
+							"})",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e6b50be4-48fa-4141-be93-cdc8d9c9ae7d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "app_id",
+						"value": "{{app_id}}"
+					},
+					{
+						"key": "user",
+						"value": "{{user}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Artist\": {\n      \t\"Name\": \"Kaleo\"\n    },\n    \"SupportingArtist\": {\n        \"Name\": \"Dan Mangan\"\n    },\n    \"Venue\": {\n        \"Name\": \"20Monroe\",\n        \"Address\": {\n            \"City\": \"Grand Rapids\",\n            \"State\": \"MI\"\n        }\n    },\n    \"Date\": \"2018-07-01T20:00:00-00:00\",\n    \"Seat\": \"UPMEZZ E306\",\n    \"Rating\": 5\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/concerts?tweetConcert=true",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"concerts"
+					],
+					"query": [
+						{
+							"key": "tweetConcert",
+							"value": "true"
+						}
+					]
+				},
+				"description": "Create a new concert."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Concert",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "63ccb2d5-5314-47de-a06c-92d206544190",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Header Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "app_id",
+						"value": "{{app_id}}"
+					},
+					{
+						"key": "user",
+						"value": "{{user}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Id\": 2,\n    \"Artist\": {\n        \"Name\": \"Chris Cornell\"\n    },\n    \"SupportingArtist\": {\n        \"Name\": \"Test Update\"\n    },\n    \"Venue\": {\n        \"Name\": \"Devos Performance Hall\",\n        \"Address\": {\n            \"City\": \"Grand Rapids\",\n            \"State\": \"MI\"\n        }\n    },\n    \"Date\": \"2016-07-02T00:00:00\",\n    \"Seat\": \"MEZZ A35\",\n    \"Rating\": 5\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/concerts/2?tweetConcert=false",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"concerts",
+						"2"
+					],
+					"query": [
+						{
+							"key": "tweetConcert",
+							"value": "false"
+						}
+					]
+				},
+				"description": "Update an existing concert"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Concert",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "727ce221-4be2-466b-882a-5f7846c18771",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Header Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "app_id",
+						"value": "{{app_id}}"
+					},
+					{
+						"key": "user",
+						"value": "{{user}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/api/concerts/3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"concerts",
+						"3"
+					]
+				},
+				"description": "Delete an existing Concert."
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,8 @@
+language: csharp
+solution: ConcertDiary.sln
+
+install:
+  - npm install newman
+
+script:
+  - node_modules/.bin/newman run tests/Concerts.postman_collection.json -e tests/Local.postman_environment.json -g tests/My_Workspace.postman_globals.json
