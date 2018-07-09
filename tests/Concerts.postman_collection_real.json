@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "73df1ff0-c310-43a1-9934-7db72e709cf1",
+						"id": "26c807f8-0383-4dd0-a2ec-be9854cc968a",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
@@ -20,7 +20,8 @@
 							"",
 							"pm.test(\"Header Content-Type is present\", function () {",
 							"    pm.response.to.have.header(\"Content-Type\");",
-							"});"
+							"});",
+							""
 						]
 					}
 				}
@@ -62,7 +63,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "9fc4035a-fbc6-47e9-b92e-c3e083389eb3",
+						"id": "2f458623-09c2-4ec4-9f68-bac7797c170f",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
@@ -89,7 +90,15 @@
 							"",
 							"pm.test(\"Request Id is valid\", function() {",
 							"    pm.expect(requestIdLength > 0).to.be.true;",
-							"});"
+							"})",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							""
 						]
 					}
 				},
