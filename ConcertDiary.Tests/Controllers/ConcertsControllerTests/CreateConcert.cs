@@ -68,121 +68,121 @@ namespace ConcertDiary.Tests.Controllers.ConcertsControllerTests
             Assert.AreEqual(_tweetUrl, response.TweetUrl);
         }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //public void PostConcert_Returns_Concert()
-        //{
-        //    var concertResponse = ConcertTestData.GetCreatedConcert();
-        //    var response = _controller.CreateConcert(true, _concert);
-        //    Assert.IsTrue(DeepEqualityComparer.AreEqual(concertResponse, response.Concert));
-        //}
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void PostConcert_Returns_Concert()
+        {
+            var concertResponse = ConcertTestData.GetCreatedConcert();
+            var response = _controller.CreateConcert(true, _concert);
+            Assert.IsTrue(DeepEqualityComparer.AreEqual(concertResponse, response.Concert));
+        }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //public void PostConcert_DoNotSendTweet_Successful()
-        //{
-        //    var response = _controller.CreateConcert(false, _concert);
-        //    Assert.AreEqual(string.Empty, response.TweetUrl);
-        //}
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void PostConcert_DoNotSendTweet_Successful()
+        {
+            var response = _controller.CreateConcert(false, _concert);
+            Assert.AreEqual(string.Empty, response.TweetUrl);
+        }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //[ExpectedException(typeof(ClientRequestException))]
-        //public void PostConcert_ConcertIsNull_ThrowsException()
-        //{
-        //    _concert = null;
+        [TestMethod]
+        [TestCategory("Unit")]
+        [ExpectedException(typeof(ClientRequestException))]
+        public void PostConcert_ConcertIsNull_ThrowsException()
+        {
+            _concert = null;
 
-        //    try
-        //    {
-        //        _controller.CreateConcert(false, _concert);
-        //    }
-        //    catch (ClientRequestException ex)
-        //    {
-        //        Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
-        //        Assert.AreEqual("Failed to parse Concert.", ex.Message);
-        //        throw;
-        //    }
-        //}
+            try
+            {
+                _controller.CreateConcert(false, _concert);
+            }
+            catch (ClientRequestException ex)
+            {
+                Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
+                Assert.AreEqual("Failed to parse Concert.", ex.Message);
+                throw;
+            }
+        }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //[ExpectedException(typeof(ClientRequestException))]
-        //public void PostConcert_ArtistIsNull_ThrowsException()
-        //{
-        //    _concert.Artist = null;
+        [TestMethod]
+        [TestCategory("Unit")]
+        [ExpectedException(typeof(ClientRequestException))]
+        public void PostConcert_ArtistIsNull_ThrowsException()
+        {
+            _concert.Artist = null;
 
-        //    try
-        //    {
-        //        _controller.CreateConcert(false, _concert);
-        //    }
-        //    catch (ClientRequestException ex)
-        //    {
-        //        Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
-        //        Assert.AreEqual("One or more Concert property is null or incorrect.", ex.Message);
-        //        _concertService.Verify(s => s.CreateConcert(It.IsAny<string>(), It.IsAny<Concert>()), Times.Never);
-        //        throw;
-        //    }
-        //}
+            try
+            {
+                _controller.CreateConcert(false, _concert);
+            }
+            catch (ClientRequestException ex)
+            {
+                Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
+                Assert.AreEqual("One or more Concert property is null or incorrect.", ex.Message);
+                _concertService.Verify(s => s.CreateConcert(It.IsAny<string>(), It.IsAny<Concert>()), Times.Never);
+                throw;
+            }
+        }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //[ExpectedException(typeof(ClientRequestException))]
-        //public void PostConcert_ArtistNameIsMissing_ThrowsException()
-        //{
-        //    _concert.Artist = new Artist {Name = string.Empty};
+        [TestMethod]
+        [TestCategory("Unit")]
+        [ExpectedException(typeof(ClientRequestException))]
+        public void PostConcert_ArtistNameIsMissing_ThrowsException()
+        {
+            _concert.Artist = new Artist { Name = string.Empty };
 
-        //    try
-        //    {
-        //        _controller.CreateConcert(false, _concert);
-        //    }
-        //    catch (ClientRequestException ex)
-        //    {
-        //        Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
-        //        Assert.AreEqual("One or more Concert property is null or incorrect.", ex.Message);
-        //        _concertService.Verify(s => s.CreateConcert(It.IsAny<string>(), It.IsAny<Concert>()), Times.Never);
-        //        throw;
-        //    }
-        //}
+            try
+            {
+                _controller.CreateConcert(false, _concert);
+            }
+            catch (ClientRequestException ex)
+            {
+                Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
+                Assert.AreEqual("One or more Concert property is null or incorrect.", ex.Message);
+                _concertService.Verify(s => s.CreateConcert(It.IsAny<string>(), It.IsAny<Concert>()), Times.Never);
+                throw;
+            }
+        }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //[ExpectedException(typeof(ClientRequestException))]
-        //public void PostConcert_AppIdHeaderMissing_ThrowsException()
-        //{
-        //    _request.Headers.Remove("app_id");
+        [TestMethod]
+        [TestCategory("Unit")]
+        [ExpectedException(typeof(ClientRequestException))]
+        public void PostConcert_AppIdHeaderMissing_ThrowsException()
+        {
+            _request.Headers.Remove("app_id");
 
-        //    try
-        //    {
-        //        _controller.CreateConcert(false, _concert);
-        //    }
-        //    catch (ClientRequestException ex)
-        //    {
-        //        Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
-        //        Assert.AreEqual("Missing AppId header.", ex.Message);
-        //        _concertService.Verify(s => s.CreateConcert(It.IsAny<string>(), It.IsAny<Concert>()), Times.Never);
-        //        throw;
-        //    }
-        //}
+            try
+            {
+                _controller.CreateConcert(false, _concert);
+            }
+            catch (ClientRequestException ex)
+            {
+                Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
+                Assert.AreEqual("Missing AppId header.", ex.Message);
+                _concertService.Verify(s => s.CreateConcert(It.IsAny<string>(), It.IsAny<Concert>()), Times.Never);
+                throw;
+            }
+        }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //[ExpectedException(typeof(ClientRequestException))]
-        //public void PostConcert_UserHeaderMissing_ThrowsException()
-        //{
-        //    _request.Headers.Remove("user");
+        [TestMethod]
+        [TestCategory("Unit")]
+        [ExpectedException(typeof(ClientRequestException))]
+        public void PostConcert_UserHeaderMissing_ThrowsException()
+        {
+            _request.Headers.Remove("user");
 
-        //    try
-        //    {
-        //        _controller.CreateConcert(false, _concert);
-        //    }
-        //    catch (ClientRequestException ex)
-        //    {
-        //        Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
-        //        Assert.AreEqual("Missing UserId header.", ex.Message);
-        //        _concertService.Verify(
-        //            s => s.CreateConcert(It.IsAny<string>(), It.IsAny<Concert>()), Times.Never);
-        //        throw;
-        //    }
-        //}
+            try
+            {
+                _controller.CreateConcert(false, _concert);
+            }
+            catch (ClientRequestException ex)
+            {
+                Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
+                Assert.AreEqual("Missing UserId header.", ex.Message);
+                _concertService.Verify(
+                    s => s.CreateConcert(It.IsAny<string>(), It.IsAny<Concert>()), Times.Never);
+                throw;
+            }
+        }
     }
 }

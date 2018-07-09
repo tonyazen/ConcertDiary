@@ -55,7 +55,9 @@ namespace ConcertDiary.Controllers
 
             var responseModel = _concertService.CreateConcert(requestId, concert);
 
-            responseModel.TweetUrl = tweetConcert ? _tweetService.TweetConcert(concert) : string.Empty;
+            responseModel.TweetUrl = tweetConcert 
+                ? _tweetService.TweetConcert(concert) 
+                : string.Empty;
 
             return responseModel;
         }

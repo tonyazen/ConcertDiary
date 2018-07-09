@@ -186,8 +186,6 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Configuration\ConfigurationValues.cs" />
-    <Compile Include="Controllers\BadConcerts2Controller.cs" />
-    <Compile Include="Controllers\BadConcertsController.cs" />
     <Compile Include="Controllers\ConcertsController.cs" />
     <Compile Include="Exceptions\ClientRequestException.cs" />
     <Compile Include="Global.asax.cs">
@@ -206,7 +204,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ConcertRepo.cs" />
     <Compile Include="Repository\IConcertRepo.cs" />
-    <Compile Include="Services\BadConcertService.cs" />
     <Compile Include="Services\ConcertService.cs" />
     <Compile Include="Services\IConcertService.cs" />
     <Compile Include="Services\ITweetService.cs" />

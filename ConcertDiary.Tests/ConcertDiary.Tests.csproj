@@ -116,11 +116,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BadConcerts2ControllerTests\GetConcerts.cs" />
-    <Compile Include="Controllers\BadConcertsControllerTests\GetConcerts.cs" />
-    <Compile Include="Controllers\BadConcertsControllerTests\CreateConcert.cs" />
     <Compile Include="Controllers\ConcertsControllerTests\CreateConcert.cs" />
-    <Compile Include="Controllers\ConcertsControllerTests\CreateConcertWithDI.cs" />
     <Compile Include="Controllers\ConcertsControllerTests\GetConcerts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData\Concerts\ConcertTestData.cs" />
