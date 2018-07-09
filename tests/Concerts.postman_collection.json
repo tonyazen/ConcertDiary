@@ -11,9 +11,15 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "73df1ff0-c310-43a1-9934-7db72e709cf1",
+						"id": "84db2deb-9fe4-451b-8a48-690f104fc581",
 						"type": "text/javascript",
 						"exec": [
+							"var myInt = 1;",
+							"",
+							"pm.test(\"True is true\", function() {",
+							"    pm.expect(myInt === 1).to.be.true;",
+							"});",
+							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
@@ -62,7 +68,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "9fc4035a-fbc6-47e9-b92e-c3e083389eb3",
+						"id": "db5fdd1a-796e-4772-8237-2ca983cd63d2",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
